@@ -1,20 +1,31 @@
+import React, { useState, useRef } from 'react';
+
 function Calculator () {
+    
+    const [odds, setodds] = useState();
+    const first_odds = useRef();
+    const second_odds = useRef();
 
-    const arbOpp = function (e) {
-        const firstOdds = this.first_odds;
-        const secondOdds = this.second_odds;
+    function arbOpp(e) {
 
-        const first = (1 / firstOdds);
-        const second = (1 / secondOdds);
-        const result = first + second;
-        console.log(first + second);
+        const first = first_odds.current.value;
+        const second = second_odds.current.value;
+
+        const firstOdds = (1 / first);
+        const secondOdds = (1 / second);
+        const result = firstOdds + secondOdds;
+        console.log(first);
+        console.log(second);
+        console.log(result);
         e.preventDefault();
     }
     
+    /*
     const stake = function (e) {
         console.log('it works!');
         e.preventDefault();
     }
+    */
 
     return (
         <div className='right'>
@@ -23,12 +34,12 @@ function Calculator () {
                 <h3>Arbitrage opportunity calculator</h3>
                 <label>
                     First Odds:
-                    <input type="text" name="first_odds"/>
+                    <input type="text" ref={first_odds}/>
                 </label>
                 <br/>
                 <label>
                     Second Odds:
-                    <input type="text" name="second_odds"/>
+                    <input type="text" ref={second_odds}/>
                     <br/>
                     <button onClick={arbOpp}>Calcutate</button>
                 </label>
@@ -43,9 +54,9 @@ function Calculator () {
                 <h3>Stake calculator</h3>
                 <label>
                     What is your stake?
-                    <input onChange={stake} type="text" name="stake" />
+                    <input type="text" />
                     <br/>
-                    <button onClick={stake}>Calcutate</button>
+                    <button >Calcutate</button>
                 </label>
                 <br/>
                 <label>
